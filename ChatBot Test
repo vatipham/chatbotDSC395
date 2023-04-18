@@ -5,3 +5,22 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/vatipham/chatbotDSC395.git
 git push -u origin main
+
+#import openai
+git clone https://github.com/openai/openai-quickstart-node.git
+cd openai-quickstart-node
+cp .env.example .env
+npm install
+npm run dev
+
+import openai
+
+openai.ChatCompletion.create(
+  model="gpt-3.5-turbo",
+  messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Who won the world series in 2020?"},
+        {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
+        {"role": "user", "content": "Where was it played?"}
+    ]
+)
