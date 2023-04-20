@@ -13,14 +13,24 @@ cp .env.example .env
 npm install
 npm run dev
 
+!pip install -q openai
+openai.api_key = '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'
+
 import openai
 
-openai.ChatCompletion.create(
-  model="gpt-3.5-turbo",
-  messages=[
+messages=[
         {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Who won the world series in 2020?"},
-        {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-        {"role": "user", "content": "Where was it played?"}
     ]
-)
+while True: 
+  message = input("User:")
+  if message: 
+      messages.append(
+        {"role":"user","content": message},
+     )
+     chat = openai.ChatCompletion.create(
+        model = "gpt-3.5-turbo",messages = messages
+     )
+  reply = chat.choices[0].messages.content
+  print(f"ChatGPT: {reply}")
+  messages.append({"role":"assistant","content":reply})
+  
